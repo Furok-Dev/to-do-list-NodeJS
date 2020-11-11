@@ -8,34 +8,47 @@ let comando = argv._[0];
 switch (comando) {
   case 'crear':
     let tarea = tareas.crearTarea(argv.descripcion);
-    if (tarea) {
-      console.log('======TAREA CREADA======'.warn);
-      console.log(`Descripcion: ${tarea.descripcion}`.success);
-      console.log(`Completado: ${tarea.completado}`.success);
-    } else {
-    }
+    console.log('======TAREA CREADA======'.warn);
+    console.log('Descripcion: '.warn + tarea.descripcion);
+    console.log(
+      'Estado: '.warn +
+        (tarea.completado ? 'Completado'.success : 'No completado'.error)
+    );
+
     break;
   case 'listar':
     console.log('===================================='.info);
     console.log('=======TAREAS POR HACER============='.info);
     console.log('===================================='.info);
     let listado = tareas.getLista();
-    for (let tarea of listado) {
-      console.log('-----------------------------------'.success);
-      console.log('Descripcion: '.warn + tarea.descripcion);
-      console.log(
-        'Estado: '.warn +
-          (tarea.completado ? 'Completado'.success : 'No completado'.error)
-      );
+    let valor = Object.entries(listado).length === 0; //validacion para ver si tenemos tareas o no
+    // console.log(valor);
+    if (valor) {
+      console.log('NO TIENES TAREAS AUN'.warn);
+      console.log('PUEDES CREAR UNA TAREA :)'.help);
+    } else {
+      for (let tarea of listado) {
+        console.log('-----------------------------------'.success);
+        console.log('Descripcion: '.warn + tarea.descripcion);
+        console.log(
+          'Estado: '.warn +
+            (tarea.completado ? 'Completado'.success : 'No completado'.error)
+        );
+      }
     }
+
     break;
   case 'actualizar':
     let respuesta = tareas.actualizar(argv.descripcion, argv.completado);
-    console.log(respuesta);
+    console.log(
+      respuesta ? 'La tarea se actualizo'.success : 'La tarea no existe'.error
+    );
     break;
   case 'eliminar':
     let eliminado = tareas.eliminar(argv.descripcion);
-    console.log(eliminado);
+    eliminado
+      ? console.log('Tarea eliminada'.warn)
+      : console.log('La tarea no existe'.error);
     break;
   default:
     console.log('Comando no reconocido');

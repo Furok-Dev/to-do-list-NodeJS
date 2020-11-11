@@ -24,7 +24,6 @@ const leerDatos = () => {
   } catch (error) {
     tareasPorHacer = [];
   }
-  // console.log(tareasPorHacer);
 };
 
 const getLista = () => {
