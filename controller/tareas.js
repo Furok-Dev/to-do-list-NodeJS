@@ -3,6 +3,7 @@
  */
 
 const fs = require('fs');
+const mensajes = require('../config/colorsConf');
 
 let tareasPorHacer = [];
 
@@ -10,9 +11,9 @@ const guardarDatos = () => {
   let data = JSON.stringify(tareasPorHacer);
   fs.writeFile('./model/data.json', data, (error) => {
     if (error) {
-      console.error(new Error('Datos no actualizados'));
+      console.error(new Error('Datos no actualizados').error);
     } else {
-      console.log('Datos guardados');
+      console.log('Datos guardados'.info);
     }
   });
 };
@@ -23,7 +24,7 @@ const leerDatos = () => {
   } catch (error) {
     tareasPorHacer = [];
   }
-  console.log(tareasPorHacer);
+  // console.log(tareasPorHacer);
 };
 
 const getLista = () => {
