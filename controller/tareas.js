@@ -60,7 +60,6 @@ const eliminar = (descripcion) => {
 
 const crearTarea = (descripcion) => {
   leerDatos();
-
   let tarea = {
     descripcion,
     completado: false,
